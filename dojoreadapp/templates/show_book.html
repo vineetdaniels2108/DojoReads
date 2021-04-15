@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <a href="/dojoread/home">Home</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+    <div>
+        <h3>Welcome {{ user.first_name }}</h3>
+        <h3>Book Title : {{ book.title }}</h3>
+        <h3>Book Author : {{ book.author }}</h3>
+    </div>
+
+    <div>
+        <h3>All Reviews</h3>
+        {% for review in reviews %}
+        <li>{{ review.posted_by.first_name }} says {{ review.review }}</li>
+        <li>{{ review.created_at }}</li>
+        {% if user.first_name == review.posted_by.first_name %}
+        <a href="/dojoread/{{review.id}}/{{review.posted_by.id}}/delete_review">Delete this review</a>
+        {% endif %}
+        {% endfor %}
+
+        {% if user not in user_reviews %}
+        <form action="/dojoread/{{book.id}}/add_review" method="POST">
+            {% csrf_token %}
+            <label for="add_review">Add Review</label>
+            <input type="text" name="review" id="review">
+            <input type="submit" value="Add Review">
+        </form>
+        {% endif %}
+    </div>
+</body>
+</html>

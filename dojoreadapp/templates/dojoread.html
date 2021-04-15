@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dojo Read</title>
+</head>
+<body>
+    <div>
+        <a href="/logout">Logout</a>
+        <a href="/dojoread/add">Add Book and Review</a>
+        <h2>Welcome {{ user.first_name }}!</h2>
+    </div>
+
+    <div>
+        <h2>Recent Book Reviews</h2>
+        {% for review in top_3 %}
+        <li> <a href="/dojoread/{{review.book.id}}/show_book">{{ review.book.title }}</a></li>
+        <li>{{ review.book.rating }}</li>
+        <li><a href="/dojoread/{{review.posted_by.id}}/show_user">{{ review.posted_by.first_name }}</a> says: {{ review.review }}</li>
+        <li>{{ review.created_at }}</li>
+        {% endfor %}
+    </div>
+
+    <div>
+        <h2>Other Books with Reviews</h2>
+        {% for book in books %}
+        <li><a href="/dojoread/{{book.id}}/show_book">{{ book.title }}</a></li>
+        {% endfor %}
+    </div>
+</body>
+</html>

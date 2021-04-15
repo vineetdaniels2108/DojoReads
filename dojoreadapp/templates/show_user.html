@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show User</title>
+</head>
+<body>
+    <div>
+        <h2>Welcome {{ user.first_name }}</h2>
+        <h2><a href="/logout">Logout</a></h2>
+        <a href="/dojoread/add">Add Book and Review</a>
+        <a href="/dojoread/home">Home</a>
+    </div>
+
+    <div>
+        <h3>User Alias {{ user_info.first_name }}</h3>
+        <h3>Name: {{ user_info.first_name }} {{ user_info.last_name }}</h3>
+        <h3>Email : {{ user_info.email }}</h3>
+        <h3>Total reviews : {{ count }}</h3>
+    </div>
+
+    <div>
+        <h3>Books Reviewed</h3>
+        {% for review in user_reviews %}
+        <li><a href="/dojoread/{{review.book.id}}/show_book">{{ review.book.title }}</a></li>
+        {% endfor %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Book</title>
+</head>
+<body>
+    <div>
+        <a href="/dojoread/home">Home</a>
+        <a href="/logout">Logout</a>
+        <h2>Add a new book Title and Reviw </h2>
+    </div>
+
+    <div>
+        <form action="/dojoread/add_book" method="POST">
+            {% csrf_token %}
+            <h2>Book Title <input type="text" name="title" id="title"></h2>
+            <h2>Book Author</h2>
+            <label for="Choose_from_list">Choose from the list </label>
+            <select name='existing_author' id="existing_author">
+                {% for author in authors %}
+                <option value="{{ author}}">{{ author }}</option>
+                {% endfor %}
+            </select>
+            <label for="add_new">Add new</label>
+            <input type="text" name="new_author" id = 'new_author'>
+            <h2>Review: <input type="text" name="review" id="review"></h2>
+            <h2>Rating
+                <select name="rating" id="rating">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </h2>
+            <input type="submit" value="Add Book and Review">
+        </form>
+    </div>
+    
+</body>
+</html>
